@@ -3,3 +3,5 @@ steps:
   args: ['build', '-t', 'gcr.io/devops-training-birkan/cloudrun-cicd-test:$COMMIT_SHA', '.']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/devops-training-birkan/cloudrun-cicd-test:$COMMIT_SHA']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['beta', 'run', 'deploy', 'you-are-awesome', '--region=europe-west4', '--platform=managed', '--image=gcr.io/devops-training-birkan/cloudrun-cicd-test:$COMMIT_SHA']
